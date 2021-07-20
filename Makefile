@@ -6,6 +6,12 @@ PKGNAME ?= "inmodule"
 VERSION=`grep -m1 "^Version:" $(PKGNAME).spec | grep -om1 "[0-9].[0-9.]**"`
 RPMS_DIR ?= "packaging/RPMS"
 
+# private variable; points to the number of the pkgname filed separated by dash
+# we should refer as subdir. For the defult valur, e.g.:
+#   inmoduleA-inmoduleB-....
+# refers to "inmoduleA"
+_SUBDIR_FIELD ?= 1
+
 # by default use values you can see below, but in case the COPR_* var is defined
 # use it instead of the default
 _COPR_REPO=$${COPR_REPO:-leapp-tests-modularity}
@@ -52,7 +58,10 @@ local_build: clean
 		--define "_rpmdir `pwd`/$(RPMS_DIR)" \
 		--define "rhel $(DIST_VERSION)" \
 		--define 'dist .el$(DIST_VERSION)' \
-		--define 'el$(DIST_VERSION) 1' || FAILED=1
+		--define 'el$(DIST_VERSION) 1'
+	@mkdir -p "$(RPMS_DIR)/`echo $(PKGNAME) | cut -d '-' -f $(_SUBDIR_FIELD)`"
+	@mv $(RPMS_DIR)/noarch/* "$(RPMS_DIR)/`echo $(PKGNAME) | cut -d '-' -f $(_SUBDIR_FIELD)`"
+	@rm -rf $(RPMS_DIR)/noarch/
 
 
 _local_build_all:
@@ -70,7 +79,7 @@ _local_build_all:
 local_build_all: clean_all
 	@echo "--- Build all RPMs ---"
 	DIST_VERSION=$(DIST_VERSION) $(MAKE) _local_build_all
-	DIST_VERSION=$$(($(DIST_VERSION) + 1)) $(MAKE) _local_build_all
+	DIST_VERSION=$$(($(DIST_VERSION) + 1)) _SUBDIR_FIELD=2 $(MAKE) _local_build_all
 
 
 .PHONY: clean clean_all prepare local_build _local_build_all local_build_all srpm

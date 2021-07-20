@@ -1,7 +1,7 @@
-Name:           inmodule-inmodule2
+Name:           inmoduleA-inmoduleA
 Version:        1.0.0
 Release:        1%{?dist}
-Summary:        Package that should be in a module and become part of another module
+Summary:        Package that should be always part of the module (on both systems)
 
 License:        MIT
 URL:            https://gitlab.cee.redhat.com/leapp/leapp-tests-modularity
