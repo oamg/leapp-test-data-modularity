@@ -1,0 +1,8 @@
+[leapp-modularity-9]
+name=Myrepo
+baseurl=https://raw.githubusercontent.com/oamg/leapp-test-data-modularity/main/repos/9
+enabled=1
+countme=1
+metadata_expire=1
+gpgcheck=0
+repo_gpgcheck=0
