@@ -1,0 +1,22 @@
+---
+document: modulemd
+version: 2
+data:
+  name: inmoduleD
+  stream: "devel"
+  version: 1
+  context: el9
+  summary: inmoduleD
+  description: >-
+    This module has been generated using dir2module tool
+  license:
+    module:
+    - MIT
+    content:
+    - MIT
+  dependencies:
+  - {}
+  artifacts:
+    rpms:
+    - nonmodule-inmoduleD-0:1.0.0-1.el9.noarch
+...

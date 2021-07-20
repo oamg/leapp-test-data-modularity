@@ -1,0 +1,22 @@
+---
+document: modulemd
+version: 2
+data:
+  name: inmoduleB
+  stream: "devel"
+  version: 1
+  context: el8
+  summary: inmoduleB
+  description: >-
+    This module has been generated using dir2module tool
+  license:
+    module:
+    - MIT
+    content:
+    - MIT
+  dependencies:
+  - {}
+  artifacts:
+    rpms:
+    - inmoduleB-inmoduleBB-0:1.0.0-1.el8.noarch
+...

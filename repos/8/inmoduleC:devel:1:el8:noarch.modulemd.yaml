@@ -1,0 +1,22 @@
+---
+document: modulemd
+version: 2
+data:
+  name: inmoduleC
+  stream: "devel"
+  version: 1
+  context: el8
+  summary: inmoduleC
+  description: >-
+    This module has been generated using dir2module tool
+  license:
+    module:
+    - MIT
+    content:
+    - MIT
+  dependencies:
+  - {}
+  artifacts:
+    rpms:
+    - inmoduleC-nonmodule-0:1.0.0-1.el8.noarch
+...
