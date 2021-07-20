@@ -5,8 +5,15 @@ Summary:        Package that should be in a module and become part of another mo
 
 License:        MIT
 URL:            https://gitlab.cee.redhat.com/leapp/leapp-tests-modularity
-
 BuildArch:      noarch
+
+%if 0%{?rhel} == 8
+ModularityLabel: inmoduleB:devel:1
+%else
+# RHEL 9
+ModularityLabel: inmoduleBB:devel:1
+%endif
+
 
 %description
 %{summary}

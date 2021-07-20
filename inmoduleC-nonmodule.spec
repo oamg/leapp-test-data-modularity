@@ -5,8 +5,12 @@ Summary:        Package that should be in a module and become nonmodular
 
 License:        MIT
 URL:            https://gitlab.cee.redhat.com/leapp/leapp-tests-modularity
-
 BuildArch:      noarch
+
+%if 0%{?rhel} == 8
+ModularityLabel: inmoduleC:devel:1
+%endif
+
 
 %description
 %{summary}

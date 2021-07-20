@@ -5,8 +5,10 @@ Summary:        Package that should be always part of the module (on both system
 
 License:        MIT
 URL:            https://gitlab.cee.redhat.com/leapp/leapp-tests-modularity
-
 BuildArch:      noarch
+
+
+ModularityLabel: inmoduleA:devel:1
 
 %description
 %{summary}

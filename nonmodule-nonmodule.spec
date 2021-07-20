@@ -5,8 +5,8 @@ Summary:        Package that should be always nonmodular
 
 License:        MIT
 URL:            https://gitlab.cee.redhat.com/leapp/leapp-tests-modularity
-
 BuildArch:      noarch
+
 
 %description
 %{summary}

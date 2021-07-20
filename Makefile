@@ -25,7 +25,8 @@ help:
 	@echo "Use of one of targets.."
 
 install-deps:
-	@rpm -q make modulemd-tools >/dev/null || dnf install -y make modulemd-tools
+	@rpm -q make modulemd-tools >/dev/null \
+		|| dnf install -y make modulemd-tools rpm-build
 
 clean:
 	@echo "--- Clean repo ---"
@@ -81,5 +82,19 @@ local_build_all: clean_all
 	DIST_VERSION=$(DIST_VERSION) $(MAKE) _local_build_all
 	DIST_VERSION=$$(($(DIST_VERSION) + 1)) _SUBDIR_FIELD=2 $(MAKE) _local_build_all
 
+_create_repo:
+	@echo "--- Prepare RPM modules for RHEL $(DIST_VERSION)"
+	@pushd "repos/$(DIST_VERSION)" ; for i in `ls -d inmodule*`; \
+		do \
+			dir2module -m "$$i" --dir "$$i" "$$i:devel:1:el$(DIST_VERSION):noarch" ; \
+		done ; \
+		popd
+	@echo "--- Create modular DNF repository for RHEL $(DIST_VERSION)"
+	@pushd "repos/$(DIST_VERSION)" ; createrepo_mod . ; popd
 
-.PHONY: clean clean_all prepare local_build _local_build_all local_build_all srpm
+create_repos: local_build_all
+	@echo "--- Create all repositories ---"
+	$(MAKE) _create_repo
+	DIST_VERSION=$$(($(DIST_VERSION) + 1)) $(MAKE) _create_repo
+
+.PHONY: clean clean_all prepare local_build _local_build_all local_build_all srpm create_repos
